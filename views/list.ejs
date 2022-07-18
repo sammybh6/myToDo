@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>To Do List</title>
+</head>
+
+<body>
+
+    <div class="ham" onclick="openNav()">&#9776;</div>
+
+    <script>
+    function openNav() {
+    document.getElementById("mySidenav").style.width = "270px";
+    document.getElementById("mySidenav").style.paddingLeft = "10px";
+    }
+
+    function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("mySidenav").style.paddingLeft = "0px";
+
+    
+    }
+    </script>
+    <div class="barplus">
+    <div class="side">
+        <div class="sidebar" id="mySidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times</a>
+        <h1>
+            Add Custom List
+        </h1>
+        <form action="/liss" method="post">
+            <input type="text" name="newList" id="inputside" class="redside" autocomplete="off"  required >
+            <button class="btnside" name="buttonList" value="<%= title %>" type="submit" >+</button>
+        </form>
+        <% for (item of newLists) { %>
+            <div class="dyn list">
+                <form action="/deletel" method="post">
+                    
+                        <a href="/<%= item %>" class="achisi">
+                        <%= item %> 
+                        </a>
+                        
+                        
+                        <button name="del" class="delb fa fa-trash" value="<%= item%>" type="submit"></button>
+                    
+                </form>
+            </div>
+            <% } %>
+        </div>
+        
+    </div>
+    <div class="structure">
+
+        
+    <div class="basic">
+        <h1>
+            <%= title %>
+        </h1>
+    
+        <div class="bar">
+        <form action="/" method="post">
+            <input type="text" name="newItem" class="red" autocomplete="off"  required >
+            <button class="btn" name="button" value="<%= title %>" type="submit" >ADD</button>
+        </form>
+        </div>
+
+    </div>
+    <div class="itemss">
+
+        
+            <% for (item of newItems) { %>
+                <div class="dyn">
+                    <form action="/delete" method="post">
+                        <div class="checkbox">
+                            <input type="checkbox" name="checkbox" value="<%= item._id %>" onchange="this.form.submit()" > 
+                            <p>
+                            <%= item.task %> 
+                            </p>
+                            <input type="hidden" name="listName" value="<%= title %>">
+                        </div>
+                    </form>
+                </div>
+                <% } %>
+    </div>
+    <div class="foot">
+
+    </div>
+    </div>
+    </div>
+    
+    
+</body>
+
+
+</html>
